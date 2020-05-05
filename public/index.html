@@ -11,22 +11,34 @@
     <script>
         if ('geolocation' in navigator) {
             console.log("geolocation is available")
-            navigator.geolocation.getCurrentPosition((position) => {
+            navigator.geolocation.getCurrentPosition(async position => {
                 const lat = position.coords.latitude
-                document.getElementById("latitude").textContent = lat
                 const lon = position.coords.longitude
+                document.getElementById("latitude").textContent = lat
                 document.getElementById("longitude").textContent = lon
 
-                console.log(position.coords)
+                const data = { lat, lon }
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                }
+                const response = await fetch('/api', options)
+                const info = await response.json()
+                console.log(info)
+
             });
         } else {
             console.log("geolocation IS NOT available")
         } 
     </script>
     <h1>Welcome to The Faces App!</h1>
-    <p>Latitude: <span id="latitude"></span>&deg;<br>
+    <p>Your current location is:<br>
+        Latitude: <span id="latitude"></span>&deg;<br>
         Longitude: <span id="longitude"></span>&deg;
-</p>
+    </p>
 </body>
 
 </html>
