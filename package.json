@@ -1,0 +1,31 @@
+{
+  "name": "faces",
+  "version": "1.0.0",
+  "description": "Make a face and add a caption",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/A-Glazer/faces.git"
+  },
+  "keywords": [
+    "selfie",
+    "picture",
+    "caption"
+  ],
+  "author": "Avigayil Glazer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/A-Glazer/faces/issues"
+  },
+  "homepage": "https://github.com/A-Glazer/faces",
+  "dependencies": {
+    "express": "^4.17.1",
+    "gitignore-command": "^0.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
