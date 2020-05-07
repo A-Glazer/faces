@@ -10,9 +10,15 @@ const database = new Datastore('database.db')
 database.loadDatabase() //this will load the existing database when the file starts 
 
 app.get('/api', (request, response) => {
-    response.json({ test: 123 })
-} )
-
+    database.find({}, (err, data) => {
+        if (err) {
+            console.log(err)
+            response.end()
+            return
+        }
+        response.json(data)
+    })
+})
 
 app.post('/api', (request, response) => {
     const data = request.body
