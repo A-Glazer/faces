@@ -23,7 +23,8 @@
   "homepage": "https://github.com/A-Glazer/faces",
   "dependencies": {
     "express": "^4.17.1",
-    "gitignore-command": "^0.3.1"
+    "gitignore-command": "^0.3.1",
+    "nedb": "^1.8.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"
