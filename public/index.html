@@ -14,30 +14,36 @@
         Latitude: <span id="latitude"></span>&deg;<br>
         Longitude: <span id="longitude"></span>&deg;
     </p>
+    <label for="caption">Enter Caption Here:</label>
+    <input id="caption" />
     <button id="submit-data">Submit</button>
 
     <script>
+        let lat, lon
+        const submitButton = document.getElementById("submit-data")
+        submitButton.addEventListener("click", async event => {
+            const caption = document.getElementById("caption").value
+            const data = { lat, lon, caption }
+            const options = {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }
+            const response = await fetch('/api', options)
+            const info = await response.json()
+            console.log(info)
+        })
+
         if ('geolocation' in navigator) {
             console.log("geolocation is available")
             navigator.geolocation.getCurrentPosition(async position => {
-                const lat = position.coords.latitude
-                const lon = position.coords.longitude
-                const submitButton = document.getElementById("submit-data")
+                lat = position.coords.latitude
+                lon = position.coords.longitude
                 document.getElementById("latitude").textContent = lat
                 document.getElementById("longitude").textContent = lon
-                submitButton.addEventListener("click", async event => {
-                    const data = { lat, lon }
-                    const options = {
-                        method: 'POST',
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(data)
-                    }
-                    const response = await fetch('/api', options)
-                    const info = await response.json()
-                    console.log(info)
-                })
+
             });
         } else {
             console.log("geolocation IS NOT available")

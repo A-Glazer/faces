@@ -8,14 +8,11 @@ app.use(express.json())
 
 const database = new Datastore('database.db')
 database.loadDatabase() //this will load the existing database when the file starts 
-database.insert({name: "Blob", status: "slimey"})
-database.insert({name: "Shmear", status: "wet"})
 
 app.post('/api', (request, response) => {
-    console.log("request", request.body)
-    response.json({
-        status: "success",
-        latitude: request.body.lat,
-        longitude: request.body.lon
-    })
+    const data = request.body
+    const timestamp = Date.now()
+    data.timestamp = timestamp
+    database.insert(data)
+    response.json(data)
 })
