@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"
+        integrity="sha256-Pg1di+fBF53Rbh9oZR/FeD1xsFzTLC963lcac1D0ias=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"
+        integrity="sha256-2/3R3NV5zryj0fDjD3cDh+SNiWQ/TJiMVZzAo5FrhiU=" crossorigin="anonymous"></script>
     <title>Faces App</title>
 </head>
 
@@ -18,10 +22,73 @@
     <input id="caption" />
     <button id="submit-data">Submit</button>
 
-    <script src="geolocation.js">
-        // getData()
+    <!-- <script src="geolocation.js"> -->
+    <script>
+        function setup() {
 
-        
+            noCanvas()
+            // set up webcam
+            const video = createCapture(VIDEO)
+            video.size(320, 240)
+
+
+            let lat, lon
+            const submitButton = document.getElementById("submit-data")
+            submitButton.addEventListener("click", async event => {
+                const caption = document.getElementById("caption").value
+                video.loadPixels()
+                const image64 = video.canvas.toDataURL()
+                const data = { lat, lon, caption, image64 }
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                }
+                const response = await fetch('/api', options)
+                const info = await response.json()
+                console.log(info)
+                getData(info)
+            })
+
+            async function getData() {
+                const response = await fetch('/api')
+                const data = await response.json()
+
+                for (item of data) {
+                    const root = document.createElement("div")
+                    const caption = document.createElement("div")
+                    const geo = document.createElement("div")
+                    const date = document.createElement("div")
+
+                    caption.textContent = `caption: ${item.caption}`
+                    geo.textContent = `${item.lat}°, ${item.lon}°`
+                    const dateString = new Date(item.timestamp).toLocaleString()
+                    date.textContent = dateString
+
+                    root.append(caption, geo, date)
+                    document.body.append(root)
+                }
+                console.log(data)
+            }
+
+            if ('geolocation' in navigator) {
+                console.log("geolocation is available")
+                navigator.geolocation.getCurrentPosition(async position => {
+                    lat = position.coords.latitude
+                    lon = position.coords.longitude
+                    document.getElementById("latitude").textContent = lat
+                    document.getElementById("longitude").textContent = lon
+
+                });
+            } else {
+                console.log("geolocation IS NOT available")
+            }
+
+
+        }
+
     </script>
 </body>
 
