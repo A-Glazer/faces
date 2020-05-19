@@ -26,3 +26,5 @@ package-lock.json
 
 # Ignore the .env file
 /.env
+
+/todo.md
