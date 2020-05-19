@@ -1,7 +1,9 @@
 function setup() {
+
     noCanvas();
     const video = createCapture(VIDEO);
     video.size(160, 120);
+    
     let lat, lon;
     const button = document.getElementById('submit');
     button.addEventListener('click', async event => {

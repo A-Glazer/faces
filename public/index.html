@@ -13,16 +13,17 @@
 
 <body>
     <h1>Captions App</h1>
-    <div><a href="/">New</a> | <a href="/logs">List</a></div>
+    <div><a href="/webcam">Webcam</a> | <a href="/logs">List</a>| <a href="/draw">Draw</a></div>
     <p>
         latitude: <span id="latitude"></span>&deg;<br />
         longitude: <span id="longitude"></span>&deg;
     </p>
-    <label for="caption">Enter Caption Here</label>
+    <p>Would you like to use a <button id="webcam">Webcam</button> or <button id="draw">Draw</button>?</p>
+    <label for="caption">Enter Caption Here:</label>
     <input id="caption" value="" />
-    <button id="submit">submit</button>
+    <button id="submit">Submit</button>
     <script src="sketch.js"></script>
-    
+
 </body>
 
 </html>
