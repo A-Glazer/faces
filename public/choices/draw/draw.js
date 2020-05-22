@@ -1,15 +1,16 @@
+console.log("draw page")
 function setup() {
 
-    noCanvas();
-    const video = createCapture(VIDEO);
-    video.size(160, 120);
-    
+    const canvas = createCanvas(160, 120);
+    pixelDensity(1);
+    background(0);
+
     let lat, lon;
     const button = document.getElementById('submit');
     button.addEventListener('click', async event => {
         const caption = document.getElementById('caption').value;
-        video.loadPixels();
-        const image64 = video.canvas.toDataURL();
+        canvas.loadPixels();
+        const image64 = canvas.elt.toDataURL();
         const data = { lat, lon, caption, image64 };
         const options = {
             method: 'POST',
@@ -36,3 +37,18 @@ function setup() {
         console.log('geolocation not available');
     }
 }
+
+function keyPressed() {
+    if (key == 'c') {
+        background(0);
+    }
+}
+
+function draw() {
+    stroke(255);
+    strokeWeight(8);
+    if (mouseIsPressed) {
+        line(pmouseX, pmouseY, mouseX, mouseY);
+    }
+}
+export default draw
