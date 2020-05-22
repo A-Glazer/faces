@@ -1,15 +1,36 @@
 console.log("webcam page")
 
 function setup() {
-
-
+    // add webcam screen
     noCanvas();
     const video = createCapture(VIDEO);
-    video.size(160, 120);
-    
+    video.size(160, 160);
+
+    // add submit button
+    const snap = document.createElement('button')
+    snap.textContent = "Snap";
+    document.body.append(snap);
+
     let lat, lon;
-    const button = document.getElementById('submit');
-    button.addEventListener('click', async event => {
+
+    snap.addEventListener("click", addCaption)
+
+    function addCaption() {
+        console.log("add caption form reached")
+        //    <label for="caption">Enter Caption Here:</label>
+        //     <input id="caption" value="" />
+        //     <button id="submit">Submit</button>
+
+        // <form action="submitForm" name="Add Caption">
+        //     <label for="caption">Enter Caption Here:</label>
+        //     <input name="caption" id="caption" value="" />
+        // </form>
+
+    }
+    // const button = document.getElementById('submit');
+    snap.addEventListener('click', async event => {
+
+
         const caption = document.getElementById('caption').value;
         video.loadPixels();
         const image64 = video.canvas.toDataURL();
@@ -24,7 +45,7 @@ function setup() {
         const response = await fetch('/api', options);
         const json = await response.json();
         console.log(json);
-    });
+        });
 
     if ('geolocation' in navigator) {
         console.log('geolocation available');
