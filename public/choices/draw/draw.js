@@ -1,5 +1,8 @@
 console.log("draw page")
+
 function setup() {
+    console.log("draw page")
+    
 
     const canvas = createCanvas(160, 120);
     pixelDensity(1);
@@ -51,4 +54,3 @@ function draw() {
         line(pmouseX, pmouseY, mouseX, mouseY);
     }
 }
-export default draw

@@ -1,12 +1,10 @@
-import * as draw from './choices/draw/draw.js'
-import * as webcam from './choices/webcam/webcam.js'
-   
-   const webcamButton = document.getElementById('webcam');
-    const drawButton = document.getElementById('draw');
-    const button = document.getElementById('submit');
-    let box = document.getElementById('box');
-    webcamButton.addEventListener("click", webcam)
-    drawButton.addEventListener("click", draw)
+console.log("sketch script page")
+//    const webcamButton = document.getElementById('webcam');
+//     const drawButton = document.getElementById('draw');
+//     const button = document.getElementById('submit');
+//     let box = document.getElementById('box');
+//     webcamButton.addEventListener("click", webcam)
+//     drawButton.addEventListener("click", draw)
 
     // if ('geolocation' in navigator) {
     //     console.log('geolocation available');

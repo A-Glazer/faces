@@ -1,4 +1,5 @@
 console.log("webcam page")
+
 function setup() {
 
 
@@ -38,4 +39,3 @@ function setup() {
         console.log('geolocation not available');
     }
 }
-export default webcam
